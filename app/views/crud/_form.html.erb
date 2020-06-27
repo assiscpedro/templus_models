@@ -31,28 +31,30 @@
 	<%end%>
 	<%= simple_nested_form_for @record, remote: remote_form, html: {class: "form-horizontal"}, url: url do |f| %>
 		<%= flash_messages_error(@record.errors) %>
-		<% @crud_helper.form_fields.each_with_index do |field, index| %>
-			<% if field[:sf][:agrupamento].present? && (index == 0 || @crud_helper.form_fields[index - 1][:sf][:agrupamento] != field[:sf][:agrupamento]) %>
-				<div class="col-sm-12">
-					<h3><%= I18n.t(field[:sf][:agrupamento]) %></h3>
-				</div>
+		<div class="form-body row">
+			<% @crud_helper.form_fields.each_with_index do |field, index| %>
+				<% if field[:sf][:agrupamento].present? && (index == 0 || @crud_helper.form_fields[index - 1][:sf][:agrupamento] != field[:sf][:agrupamento]) %>
+					<div class="col-sm-12">
+						<h3><%= I18n.t(field[:sf][:agrupamento]) %></h3>
+					</div>
+				<% end %>
+				<% if field[:sf][:if].present? %>
+					<% next unless field[:sf][:if].call(f.object) %>
+				<% end %>
+				<% if field[:sf][:grupo].present? %>
+					<%= render "/crud/form_group", f: f, key: field[:attribute], groups: field[:sf] %>
+				<% else %>
+					<% if @model.reflect_on_association(field[:attribute]).try(:macro) == :belongs_to && is_raro_crud(@model.reflect_on_association(field[:attribute]).class_name) && field[:sf][:add_registro].nil?%>
+							<%= render_plus_button(field,f,@model,@record) %>
+					<%else%>
+							<%= render_field(field,f,@model,@record) %>
+					<%end%>
+				<% end %>
+				<% if field[:sf][:separador].present? %>
+					<hr>
+				<% end %>
 			<% end %>
-			<% if field[:sf][:if].present? %>
-				<% next unless field[:sf][:if].call(f.object) %>
-			<% end %>
-			<% if field[:sf][:grupo].present? %>
-				<%= render "/crud/form_group", f: f, key: field[:attribute], groups: field[:sf] %>
-			<% else %>
-				<% if @model.reflect_on_association(field[:attribute]).try(:macro) == :belongs_to && is_raro_crud(@model.reflect_on_association(field[:attribute]).class_name) && field[:sf][:add_registro].nil?%>
-						<%= render_plus_button(field,f,@model,@record) %>
-				<%else%>
-						<%= render_field(field,f,@model,@record) %>
-				<%end%>
-			<% end %>
-			<% if field[:sf][:separador].present? %>
-				<hr>
-			<% end %>
-		<% end %>
+		</div>
 		<%@crud_helper.form_groups.each do |key, groups|%>
 			<%= render "/crud/form_group", f: f, key: key, groups: groups %>
 		<% end %>

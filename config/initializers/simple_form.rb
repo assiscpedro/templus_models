@@ -95,7 +95,7 @@ SimpleForm.setup do |config|
   # config.label_text = lambda { |label, required| "#{required} #{label}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  config.label_class = 'label-control'
 
   # You can define the class to use on all forms. Default is simple_form.
   # config.form_class = :simple_form
@@ -140,13 +140,13 @@ SimpleForm.setup do |config|
   # Cache SimpleForm inputs discovery
   # config.cache_discovery = !Rails.env.development?
   
-  config.wrappers :default, class: :input, :tag => 'div', :error_class => 'has-error' do |b|
+  config.wrappers :default, :tag => 'div', :class => 'col-sm-6', :error_class => 'has-danger' do |b|
     b.use :html5
-    b.wrapper :tag => 'div', :class => 'form-group' do |ba|
-      ba.use :label, :class => 'col-sm-2 control-label'
-      ba.wrapper :tag => 'div', :class => 'col-sm-9' do |ba2|
-        ba2.use :input, :class => 'form-control'
-        ba2.use :error, :wrap_with => { :tag => 'span', :class => 'help-block m-b-none text-danger' }
+    b.wrapper :tag => 'div', :class => 'form-group row' do |bab|
+      bab.use :label, :class => 'col-md-3'
+      bab.wrapper :tag => 'div', :class => 'col-sm-9' do |ba2|
+        ba2.use :input, :class => 'form-control', error_class: 'is-invalid'
+        ba2.use :error, error_class: 'is-invalid', :wrap_with => { :tag => 'span', :class => 'help-block m-b-none text-danger' }
         ba2.use :hint,  :wrap_with => { :tag => 'span', :class => 'help-block text-muted' }
       end
     end

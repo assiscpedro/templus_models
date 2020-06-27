@@ -29,10 +29,12 @@ module SearchHelper
       label = I18n.t("simple_form.labels.#{modelo.name.underscore}.#{name}", default: I18n.t("shared.#{name}"))
       label = I18n.t(opts[:label], default: I18n.t("shared.#{name}")) if opts[:label]
 
-      @buffer << "<div class=\"form-group\">"
+      @buffer << "<div class=\"form-group row\">"
       @buffer << raro_label(label,opts)
       @buffer << "<div class='col-sm-10'>"
+      @buffer << "<div class=\"row\">"
       @buffer << raro_input(name, prototype.type, opts)
+      @buffer << "</div>"
       @buffer << "</div>"
       @buffer << "</div>"
     end
@@ -115,7 +117,7 @@ module SearchHelper
       input_class = opts[:input_html].try(:[], :class)
       collection.each do |e|
         buf << "<span class='checkbox' style='display: inline;'>"
-        buf << "<label for='vaga_filtro_vaga_attributes_perfil_executor' class='control-label'>"
+        buf << "<label for='vaga_filtro_vaga_attributes_perfil_executor' class='label-control'>"
         buf << "<input class='form-control check_boxes optional #{input_class}' type='checkbox' value='#{e[0]}' name='#{name}' style=''> #{e[1]}"
         buf << '</label>'
         buf << '</span>'
@@ -149,7 +151,7 @@ module SearchHelper
       if opts[:as] and opts[:as] == :hidden
         ""
       else
-      "<label class='col-sm-2 control-label'>#{name}</label>"
+      "<label class='col-sm-2 label-control'>#{name}</label>"
       end
     end
 
@@ -285,6 +287,6 @@ module SearchHelper
     end
 
     def raro_group(text)
-      @buffer << "<div class=\"col-sm-12 label label-primary\" style=\"margin-bottom:10px; font-size:14px;display: inline-block;\"><b>#{text}</b></div>"
+      @buffer << "<div class=\"row label label-primary mb-2\"><b class=\"mx-auto\">#{text}</b></div>"
     end
 end

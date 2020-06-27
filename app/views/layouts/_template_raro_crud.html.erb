@@ -1,13 +1,13 @@
 <%unless params[:render] == 'modal'%>
 	<div class="row wrapper border-bottom white-bg page-heading">
-		<div class="col-lg-3">
+		<div class="col-lg-12">
 			<h2>
 				<% if content_for? :header %>
 					<%= yield  :header %>
 				<% end %>
 			</h2>
 			<ol class="breadcrumb">
-				<li>
+				<li class="breadcrumb-item">
 					<%= link_to root_path do %>
 						<%= I18n.t("home") %>
 					<% end %>
