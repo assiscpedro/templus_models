@@ -62,7 +62,7 @@
 			<div class="col-sm-4 col-sm-offset-2">
 				<%= f.submit I18n.t("save"), class: 'btn btn-primary'  %>
 				<%unless params[:render] == 'modal'%>
-					<%= link_to I18n.t("undo"), @url, class: 'btn btn-default', data: {push: 'partial', target: "#form"} %>
+					<%= link_to I18n.t("undo"), @url, class: 'btn btn-default' %>
 				<% end %>
 			</div>
 		</div>

@@ -246,7 +246,7 @@ module SearchHelper
 
     def raro_before_form(model, partial, var, url, scope, sort)
       buffer = "<div id='search_box'>"+
-      "<form method='get' class=form-horizontal action='#{url}' data-push='partial' data-target='#form'>" +
+      "<form method='get' class=form-horizontal action='#{url}'>" +
       "<input type='hidden' name='partial' value='#{partial}'>" +
       "<input type='hidden' name='var' value='#{var}'>"
       buffer << "<input type='hidden' name='q[s]' value='#{sort}'>" if sort.present?

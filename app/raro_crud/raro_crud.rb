@@ -449,7 +449,6 @@ class RaroCrud
             text: opts[:nome],
             modelo: self.modelo,
             id:   opts[:id],
-            data: {push: 'partial', target: '#form'},
             icon: "fa fa-#{opts[:icon]}",
             class: 'btn btn-small btn-primary btn-rounded',
             link: opts[:link],

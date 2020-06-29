@@ -29,7 +29,7 @@ module CrudHelper
     if can?(:read, classe)
       buffer = ""
       buffer << "<li class='childreen #{controller.controller_name == 'crud' and params[:model] == modelo ? 'active' : '' }'>"
-      buffer << link_to("<i class='#{icon}'></i><span>#{nome}</span>".html_safe, url, data: {push: true, crumb: 'wielka'})
+      buffer << link_to("<i class='#{icon}'></i><span>#{nome}</span>".html_safe, url)
       buffer << "</li>"
       buffer.html_safe
     end
