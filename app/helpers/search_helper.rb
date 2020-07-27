@@ -222,7 +222,9 @@ module SearchHelper
     def raro_date_range(name)
       "<div class='col-sm-6'>
       <div class=\"input-group date\">
-      <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>
+      <div class=\"input-group-prepend\">
+      <span class=\"input-group-text\"><i class=\"fa fa-calendar\"></i></span>
+      </div>
       <input class=\"raro_date_range form-control\" type=\"text\"
              name=\"date-range_#{name}\"
              id='q_#{name}_range'
